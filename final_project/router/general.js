@@ -38,8 +38,12 @@ public_users.get('/author/:author',function (req, res) {
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const title = req.params.title;
+    for (const key in books) {
+        if (books[key].title.includes(title)) {
+            return res.status(200).json({ message: `the book with the title ${title} is retrieved.`, data: books[key] });            
+        }
+    }    
 });
 
 //  Get book review
