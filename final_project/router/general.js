@@ -21,16 +21,19 @@ public_users.get('/isbn/:isbn',function (req, res) {
 
     for (const key in books) {
         if (key === isbn) {
-            theBook = books[key] ;
-            return res.status(200).json({ message: `the book with the isbn ${isbn} is retrieved.`, data: theBook });
+            return res.status(200).json({ message: `the book with the isbn ${isbn} is retrieved.`, data: books[key] });
         }
     }
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const author = req.params.author;
+    for (const key in books) {
+        if (books[key].author.includes(author)) {
+            return res.status(200).json({ message: `the book with the author ${author} is retrieved.`, data: books[key] });
+        }
+    }
 });
 
 // Get all books based on title
